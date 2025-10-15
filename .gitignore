@@ -1,0 +1,25 @@
+# Sanal Ortam
+venv/
+.venv/
+env/
+
+# API Anahtarları ve Gizli Bilgiler
+.env
+
+# Python Önbellekleri
+__pycache__/
+*.pyc
+
+# AI Kütüphanesi Önbellekleri
+.cache/
+
+# Yerel Veritabanı Dosyaları
+chroma_db/
+*.sqlite3
+
+# Kaggle'dan İndirilen Veri Seti Klasörü
+veri-seti/
+
+# İşletim Sistemi Dosyaları
+.DS_Store
+Thumbs.db
