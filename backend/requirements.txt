@@ -2,6 +2,7 @@
 
 # Veri İşleme
 pandas
+kagglehub
 
 # RAG Mimarisi ve Framework
 langchain
@@ -14,6 +15,7 @@ google-generativeai
 
 # Vektör Veritabanı
 chromadb
+
 
 # Gizli Bilgileri Yönetme
 python-dotenv
