@@ -16,6 +16,12 @@ google-generativeai
 # Vektör Veritabanı
 chromadb
 
+# Web Framework (Backend API için)
+fastapi
+uvicorn[standard]
+
+# CORS için
+python-multipart
 
 # Gizli Bilgileri Yönetme
 python-dotenv
