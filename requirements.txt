@@ -1,0 +1,22 @@
+# requirements.txt
+
+# Veri İşleme
+pandas
+
+# RAG Mimarisi ve Framework
+langchain
+langchain-core
+langchain-text-splitters
+
+# Google Gemini Modelleri (LLM ve Embedding)
+langchain-google-genai
+google-generativeai
+
+# Vektör Veritabanı
+chromadb
+
+# Web Arayüzü
+streamlit
+
+# Gizli Bilgileri Yönetme
+python-dotenv
