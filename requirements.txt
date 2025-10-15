@@ -15,8 +15,5 @@ google-generativeai
 # Vektör Veritabanı
 chromadb
 
-# Web Arayüzü
-streamlit
-
 # Gizli Bilgileri Yönetme
 python-dotenv
