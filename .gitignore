@@ -36,6 +36,7 @@ build/
 
 # JetBrains (PyCharm)
 .idea/
+backend/.idea
 *.iml
 
 # VS Code (varsa)
