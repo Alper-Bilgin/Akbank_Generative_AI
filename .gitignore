@@ -48,3 +48,6 @@ backend/.idea
 .env.development.local
 .env.test.local
 .env.production.local
+
+# ChromaDB Vector Database
+backend/chroma_db/
