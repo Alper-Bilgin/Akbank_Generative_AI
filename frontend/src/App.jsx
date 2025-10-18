@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar.jsx";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100">
+    <div className="min-h-screen bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Navbar />
       <main className="container mx-auto px-4 py-8">
         <Routes>
