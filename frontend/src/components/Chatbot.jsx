@@ -2,16 +2,30 @@ import React, { useState, useRef, useEffect } from "react";
 import { FaPaperPlane } from "react-icons/fa";
 import Message from "./Message.jsx";
 import axios from "../api/axiosInstance.jsx";
+//import { FaPaperPlane, FaTrash } from "react-icons/fa";
 
 export default function Chatbot() {
-  const [messages, setMessages] = useState([{ id: 1, from: "bot", text: "Hoşgeldiniz! Haberlerle ilgili sorularınızı sorabilirsiniz." }]);
+  // ✅ localStorage'dan geçmişi yükle
+  const [messages, setMessages] = useState(() => {
+    const saved = localStorage.getItem("chat_messages");
+    return saved ? JSON.parse(saved) : [{ id: 1, from: "bot", text: "Hoşgeldiniz! Haberlerle ilgili sorularınızı sorabilirsiniz." }];
+  });
+
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const listRef = useRef(null);
 
+  // ✅ Her mesaj değiştiğinde localStorage’a kaydet
   useEffect(() => {
-    // en son mesaja kaydır
-    listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
+    localStorage.setItem("chat_messages", JSON.stringify(messages));
+  }, [messages]);
+
+  // ✅ Yeni mesaj geldiğinde aşağı kaydır
+  useEffect(() => {
+    listRef.current?.scrollTo({
+      top: listRef.current.scrollHeight,
+      behavior: "smooth",
+    });
   }, [messages]);
 
   const sendMessage = async (e) => {
@@ -25,25 +39,36 @@ export default function Chatbot() {
     setLoading(true);
 
     try {
-      // /chat endpoint'ine sadece string içeren bir payload gönderiyoruz
       const resp = await axios.post("/chat", { message: trimmed });
-      // Beklenen: { reply: string } veya direkt string
       const replyText = resp?.data?.reply ?? resp?.data ?? "Sunucudan geçerli cevap alınamadı.";
       const botMsg = { id: Date.now() + 1, from: "bot", text: replyText };
       setMessages((prev) => [...prev, botMsg]);
     } catch (err) {
       console.error(err);
-      const botMsg = { id: Date.now() + 2, from: "bot", text: "Üzgünüz, sunucuya ulaşırken bir hata oluştu." };
+      const botMsg = {
+        id: Date.now() + 2,
+        from: "bot",
+        text: "Üzgünüz, sunucuya ulaşırken bir hata oluştu.",
+      };
       setMessages((prev) => [...prev, botMsg]);
     } finally {
       setLoading(false);
     }
   };
 
+  // ✅ Geçmişi temizleme butonu
+  const clearChat = () => {
+    localStorage.removeItem("chat_messages");
+    setMessages([{ id: 1, from: "bot", text: "Sohbet sıfırlandı. Yeni bir sohbete başlayabilirsiniz." }]);
+  };
+
   return (
-    <div className="bg-slate-200 dark:bg-slate-800 rounded-lg shadow p-4 md:p-6 transition-colors">
+    <div className="bg-slate-200 dark:bg-slate-800 rounded-lg shadow p-4 md:p-6 transition-colors duration-300">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">NewsBot Sohbet</h2>
+        <button onClick={clearChat} className="text-sm px-3 py-1 rounded bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600 transition-colors">
+          Sohbeti Temizle
+        </button>
       </div>
 
       <div ref={listRef} className="h-[60vh] md:h-[65vh] overflow-auto p-3 rounded bg-slate-100 dark:bg-slate-900/40 mb-4 transition-colors">
