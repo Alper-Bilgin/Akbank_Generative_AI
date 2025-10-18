@@ -36,6 +36,7 @@ build/
 
 # JetBrains (PyCharm)
 .idea/
+backend/.idea
 *.iml
 
 # VS Code (varsa)
@@ -47,3 +48,6 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
+
+# ChromaDB Vector Database
+backend/chroma_db/
