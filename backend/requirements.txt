@@ -8,6 +8,10 @@ kagglehub
 langchain
 langchain-core
 langchain-text-splitters
+langchain-community
+sentence-transformers
+langchain-huggingface
+langchain-chroma
 
 # Google Gemini Modelleri (LLM ve Embedding)
 langchain-google-genai
