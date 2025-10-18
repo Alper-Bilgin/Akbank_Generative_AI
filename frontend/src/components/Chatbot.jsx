@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import { FaPaperPlane } from "react-icons/fa";
+import { FaPaperPlane, FaTrash } from "react-icons/fa";
 import Message from "./Message.jsx";
 import axios from "../api/axiosInstance.jsx";
-//import { FaPaperPlane, FaTrash } from "react-icons/fa";
 
 export default function Chatbot() {
   // ✅ localStorage'dan geçmişi yükle
@@ -39,9 +38,13 @@ export default function Chatbot() {
     setLoading(true);
 
     try {
-      const resp = await axios.post("/chat", { message: trimmed });
-      const replyText = resp?.data?.reply ?? resp?.data ?? "Sunucudan geçerli cevap alınamadı.";
+      // 🔹 Backend'e doğru JSON formatında gönderiyoruz
+      const resp = await axios.post("/chat", { question: trimmed });
+
+      // 🔹 Backend'den "answer" alanını okuyoruz
+      const replyText = resp?.data?.answer ?? "Sunucudan geçerli cevap alınamadı.";
       const botMsg = { id: Date.now() + 1, from: "bot", text: replyText };
+
       setMessages((prev) => [...prev, botMsg]);
     } catch (err) {
       console.error(err);
@@ -66,8 +69,13 @@ export default function Chatbot() {
     <div className="bg-slate-200 dark:bg-slate-800 rounded-lg shadow p-4 md:p-6 transition-colors duration-300">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">NewsBot Sohbet</h2>
-        <button onClick={clearChat} className="text-sm px-3 py-1 rounded bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600 transition-colors">
-          Sohbeti Temizle
+        <button
+          onClick={clearChat}
+          className="flex items-center gap-2 text-sm px-3 py-2 rounded bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600 transition-colors"
+          title="Geçmişi Temizle"
+        >
+          <FaTrash className="text-red-500" />
+          <span className="hidden sm:inline">Sohbeti Temizle</span>
         </button>
       </div>
 
