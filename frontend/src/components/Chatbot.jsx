@@ -5,7 +5,6 @@ import axios from "../api/axiosInstance.jsx";
 import QuickQuestions from "./QuickQuestions.jsx";
 
 export default function Chatbot() {
-  // ✅ localStorage'dan geçmişi yükle
   const [messages, setMessages] = useState(() => {
     const saved = localStorage.getItem("chat_messages");
     return saved
@@ -23,12 +22,10 @@ export default function Chatbot() {
   const [loading, setLoading] = useState(false);
   const listRef = useRef(null);
 
-  // ✅ Her mesaj değiştiğinde localStorage’a kaydet
   useEffect(() => {
     localStorage.setItem("chat_messages", JSON.stringify(messages));
   }, [messages]);
 
-  // ✅ Yeni mesaj geldiğinde aşağı kaydır
   useEffect(() => {
     listRef.current?.scrollTo({
       top: listRef.current.scrollHeight,
@@ -36,13 +33,11 @@ export default function Chatbot() {
     });
   }, [messages]);
 
-  // ✅ Hızlı soruya tıklanınca çalışır
   const handleQuickQuestion = (questionText) => {
     setInput(questionText);
-    sendMessage({ preventDefault: () => {} }); // sahte bir submit event
+    sendMessage({ preventDefault: () => {} });
   };
 
-  // ✅ Mesaj gönderme
   const sendMessage = async (e) => {
     e?.preventDefault();
     const trimmed = input.trim();
@@ -75,7 +70,6 @@ export default function Chatbot() {
     }
   };
 
-  // ✅ Geçmişi temizleme
   const clearChat = () => {
     localStorage.removeItem("chat_messages");
     setMessages([
@@ -101,15 +95,17 @@ export default function Chatbot() {
         </button>
       </div>
 
-      {/* ✅ Hızlı Soru Kutucukları */}
-      <QuickQuestions onSelect={handleQuickQuestion} />
-
+      {/* ✅ Mesajlar */}
       <div ref={listRef} className="h-[60vh] md:h-[65vh] overflow-auto p-3 rounded bg-slate-100 dark:bg-slate-900/40 mb-4 transition-colors">
         {messages.map((m) => (
           <Message key={m.id} from={m.from} text={m.text} />
         ))}
       </div>
 
+      {/* ✅ Örnek sorular - input'un hemen üstünde */}
+      <QuickQuestions onSelect={handleQuickQuestion} />
+
+      {/* ✅ Mesaj gönderme alanı */}
       <form onSubmit={sendMessage} className="flex gap-3">
         <input
           className="flex-1 bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white rounded px-4 py-3 focus:outline-none transition-colors"
