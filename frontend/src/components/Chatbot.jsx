@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { FaPaperPlane, FaTrash } from "react-icons/fa";
 import Message from "./Message.jsx";
 import axios from "../api/axiosInstance.jsx";
+import QuickQuestions from "./QuickQuestions.jsx";
 
 export default function Chatbot() {
   // ✅ localStorage'dan geçmişi yükle
@@ -31,6 +32,11 @@ export default function Chatbot() {
     e?.preventDefault();
     const trimmed = input.trim();
     if (!trimmed) return;
+
+    const handleQuickQuestion = (questionText) => {
+      setInput(questionText);
+      sendMessage({ preventDefault: () => {} }); // sahte event
+    };
 
     const userMsg = { id: Date.now(), from: "user", text: trimmed };
     setMessages((prev) => [...prev, userMsg]);
@@ -78,6 +84,8 @@ export default function Chatbot() {
           <span className="hidden sm:inline">Sohbeti Temizle</span>
         </button>
       </div>
+
+      <QuickQuestions onSelect={handleQuickQuestion} />
 
       <div ref={listRef} className="h-[60vh] md:h-[65vh] overflow-auto p-3 rounded bg-slate-100 dark:bg-slate-900/40 mb-4 transition-colors">
         {messages.map((m) => (
