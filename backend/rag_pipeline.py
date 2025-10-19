@@ -26,8 +26,6 @@ def build_or_load_pipeline(documents, recreate_index=False, k=5):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
     docs = documents or []
     chunks = text_splitter.split_documents(docs)
-    print(f"Belge sayısı: {len(docs)} | Parça sayısı: {len(chunks)}")
-
     embedding_function = HuggingFaceEmbeddings(
         model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
     )

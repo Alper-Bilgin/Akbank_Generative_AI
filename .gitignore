@@ -50,4 +50,4 @@ backend/.idea
 .env.production.local
 
 # ChromaDB Vector Database
-backend/chroma_db/
+chroma_db/
