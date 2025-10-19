@@ -23,7 +23,7 @@ def build_or_load_pipeline(documents, recreate_index=False, k=5):
     if not os.getenv("GOOGLE_API_KEY"):
         raise RuntimeError("GOOGLE_API_KEY .env içinde tanımlı değil.")
 
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     docs = documents or []
     chunks = text_splitter.split_documents(docs)
     embedding_function = HuggingFaceEmbeddings(
@@ -49,7 +49,7 @@ def build_or_load_pipeline(documents, recreate_index=False, k=5):
 
     retriever = vectorstore.as_retriever(search_kwargs={"k": k})
 
-    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.3)
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.2)
 
     template = (
         "Sana verilen metin parçalarını kullanarak soruları yanıtlayan bir haber asistanısın. "
