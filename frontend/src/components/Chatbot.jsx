@@ -8,7 +8,15 @@ export default function Chatbot() {
   // ✅ localStorage'dan geçmişi yükle
   const [messages, setMessages] = useState(() => {
     const saved = localStorage.getItem("chat_messages");
-    return saved ? JSON.parse(saved) : [{ id: 1, from: "bot", text: "Hoşgeldiniz! Haberlerle ilgili sorularınızı sorabilirsiniz." }];
+    return saved
+      ? JSON.parse(saved)
+      : [
+          {
+            id: 1,
+            from: "bot",
+            text: "Hoşgeldiniz! Haberlerle ilgili sorularınızı sorabilirsiniz.",
+          },
+        ];
   });
 
   const [input, setInput] = useState("");
@@ -28,15 +36,17 @@ export default function Chatbot() {
     });
   }, [messages]);
 
+  // ✅ Hızlı soruya tıklanınca çalışır
+  const handleQuickQuestion = (questionText) => {
+    setInput(questionText);
+    sendMessage({ preventDefault: () => {} }); // sahte bir submit event
+  };
+
+  // ✅ Mesaj gönderme
   const sendMessage = async (e) => {
     e?.preventDefault();
     const trimmed = input.trim();
     if (!trimmed) return;
-
-    const handleQuickQuestion = (questionText) => {
-      setInput(questionText);
-      sendMessage({ preventDefault: () => {} }); // sahte event
-    };
 
     const userMsg = { id: Date.now(), from: "user", text: trimmed };
     setMessages((prev) => [...prev, userMsg]);
@@ -44,13 +54,13 @@ export default function Chatbot() {
     setLoading(true);
 
     try {
-      // 🔹 Backend'e doğru JSON formatında gönderiyoruz
       const resp = await axios.post("/chat", { question: trimmed });
-
-      // 🔹 Backend'den "answer" alanını okuyoruz
       const replyText = resp?.data?.answer ?? "Sunucudan geçerli cevap alınamadı.";
-      const botMsg = { id: Date.now() + 1, from: "bot", text: replyText };
-
+      const botMsg = {
+        id: Date.now() + 1,
+        from: "bot",
+        text: replyText,
+      };
       setMessages((prev) => [...prev, botMsg]);
     } catch (err) {
       console.error(err);
@@ -65,10 +75,16 @@ export default function Chatbot() {
     }
   };
 
-  // ✅ Geçmişi temizleme butonu
+  // ✅ Geçmişi temizleme
   const clearChat = () => {
     localStorage.removeItem("chat_messages");
-    setMessages([{ id: 1, from: "bot", text: "Sohbet sıfırlandı. Yeni bir sohbete başlayabilirsiniz." }]);
+    setMessages([
+      {
+        id: 1,
+        from: "bot",
+        text: "Sohbet sıfırlandı. Yeni bir sohbete başlayabilirsiniz.",
+      },
+    ]);
   };
 
   return (
@@ -85,6 +101,7 @@ export default function Chatbot() {
         </button>
       </div>
 
+      {/* ✅ Hızlı Soru Kutucukları */}
       <QuickQuestions onSelect={handleQuickQuestion} />
 
       <div ref={listRef} className="h-[60vh] md:h-[65vh] overflow-auto p-3 rounded bg-slate-100 dark:bg-slate-900/40 mb-4 transition-colors">
