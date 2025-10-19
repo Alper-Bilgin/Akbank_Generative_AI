@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaPaperPlane, FaTrash } from "react-icons/fa";
+import { FaSpinner } from "react-icons/fa6"; // ✅ Spinner eklendi
 import Message from "./Message.jsx";
 import axios from "../api/axiosInstance.jsx";
 import QuickQuestions from "./QuickQuestions.jsx";
@@ -13,7 +14,7 @@ export default function Chatbot() {
           {
             id: 1,
             from: "bot",
-            text: "Hoşgeldiniz! Haberlerle ilgili sorularınızı sorabilirsiniz.",
+            text: "Hoşgeldiniz! Soru sormadan önce (Proje Hakkında) sayfasını ziyaret etmenizi tavsiye ederiz.",
           },
         ];
   });
@@ -102,11 +103,11 @@ export default function Chatbot() {
         ))}
       </div>
 
-      {/* ✅ Örnek sorular - input'un hemen üstünde */}
+      {/* ✅ Örnek sorular */}
       <QuickQuestions onSelect={handleQuickQuestion} />
 
       {/* ✅ Mesaj gönderme alanı */}
-      <form onSubmit={sendMessage} className="flex gap-3">
+      <form onSubmit={sendMessage} className="flex gap-3 mt-4">
         <input
           className="flex-1 bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white rounded px-4 py-3 focus:outline-none transition-colors"
           placeholder="Mesajınızı yazın..."
@@ -122,7 +123,10 @@ export default function Chatbot() {
           disabled={loading}
         >
           {loading ? (
-            "Gönderiliyor..."
+            <>
+              <FaSpinner className="animate-spin text-white" />
+              Gönderiliyor...
+            </>
           ) : (
             <>
               <FaPaperPlane /> Gönder
