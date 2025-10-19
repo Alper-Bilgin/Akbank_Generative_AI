@@ -1,7 +1,7 @@
 import React from "react";
 import { FaQuestionCircle } from "react-icons/fa";
 
-const questions = ["Türkiye Siyaseti hakkında bana bilgi verir misin?", "2000 yılına ait spor haberlerini sırasıyla ver?", "Recep Tayyip Erdoğan kimdir?"];
+const questions = ["Türkiye Siyaseti hakkında bana 5 haber verir misin?", "Sağlık alanından haberler verir misin?", "Teknoloji dünyasıda yaşanan son gelişmeler nelerdir?"];
 
 export default function QuickQuestions({ onSelect }) {
   return (
