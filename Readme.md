@@ -508,13 +508,6 @@ Bu proje, Konya Teknik Üniversitesi Bilgisayar Mühendisliği öğrencileri tar
 
 ![Chatbot Arayüzü](Video/chatbot-screenshot.png)
 
-## Videolar
-
-### Demo Video
-<video width="100%" controls>
-  <source src="Video/hakkında.mov" type="video/mov">
-  <source src="Video/anasayfa.mov" type="video/mov">
-</video>
 
 
 
