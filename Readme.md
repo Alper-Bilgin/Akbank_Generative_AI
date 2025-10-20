@@ -504,7 +504,9 @@ Bu proje, Konya Teknik Üniversitesi Bilgisayar Mühendisliği öğrencileri tar
 -  [LinkedIn Profili](https://www.linkedin.com/in/ahmet-berke-%C3%A7ift%C3%A7i-2111672b4/)
 
 ---
-##  Resimler 
-![chatbot](Video/Ekran Resmi 2025-10-20 15.58.45.png)
+##  Resimler
+
+![Chatbot Arayüzü](Video/chatbot-screenshot.png)
+
 
 
