@@ -505,6 +505,6 @@ Bu proje, Konya Teknik Üniversitesi Bilgisayar Mühendisliği öğrencileri tar
 
 ---
 ##  Resimler 
-![chatbot](https://github.com/Alper-Bilgin/Akbank_Generative_AI/blob/main/Video/Ekran%20Resmi%202025-10-20%2015.58.45.png")
+![chatbot](Video/Ekran Resmi 2025-10-20 15.58.45.png)
 
 
