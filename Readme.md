@@ -47,7 +47,7 @@ RAG, büyük dil modellerinin (LLM) bilgi eksikliğini gidermek için dış kayn
 
 ## Veri Seti
 
-- **Kaynak**: [Kaggle - 42 Bin Haber Veri Kümesi]([https://www.kaggle.com/datasets](https://www.kaggle.com/datasets/oktayozturk010/42000-news-text-in-13-classes))
+- **Kaynak:** [Kaggle - 42 Bin Haber Veri Kümesi](https://www.kaggle.com/datasets/oktayozturk010/42000-news-text-in-13-classes)
 - **İçerik**: 42.000 Türkçe haber metni, 13 kategori (teknoloji, spor, ekonomi, vb.)
 - **Veri Formatı**:
   - `news/` klasöründe .txt formatlı haberler
